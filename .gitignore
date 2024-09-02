@@ -1,0 +1,66 @@
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Ignore Terraform crash logs
+crash.log
+
+# Ignore Terraform plan files
+*.tfplan
+
+# Ignore Terraform variable files (especially if they contain sensitive information)
+*.tfvars
+*.tfvars.json
+
+# Ignore Terraform module directories
+.terraform/
+
+# Ignore Ansible temporary files
+*.retry
+
+# Ignore Ansible vault files
+*.vault
+
+# Ignore Kubernetes configuration files
+.kube/
+
+# Ignore any custom environment variable files
+.env
+.env.*
+
+# Ignore local editor or IDE files
+.idea/
+.vscode/
+*.swp
+*~
+
+# Ignore macOS-specific files
+.DS_Store
+
+# Ignore Linux-specific files
+*.log
+*.bak
+
+# Ignore Windows-specific files
+Thumbs.db
+desktop.ini
+
+# Ignore Python virtual environments
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.venv/
+.env/
+
+# Ignore node_modules directory (if using JavaScript tooling)
+node_modules/
+
+# Ignore packer build artifacts
+packer_cache/
+packer_builds/
+
+# Ignore SSH key files (in case they're used in automation scripts)
+*.pem
+*.key
