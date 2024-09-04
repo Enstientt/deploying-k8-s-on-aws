@@ -16,7 +16,7 @@ the cost of using a managed kubernetes cluster is high , so that we aim to creat
 <br />
 <div align="center">
   <a href="https://plugins.jetbrains.com/files/7808/595185/icon/pluginIcon.png">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://plugins.jetbrains.com/files/7808/595185/icon/pluginIcon.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Terraform HCL</h3>
