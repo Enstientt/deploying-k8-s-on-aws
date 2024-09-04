@@ -97,8 +97,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This project will give an insight about provisioning  building a kubernetes cluster  production-ready
-on aws using terraform for infra provisiong and an open source  kubespray for cluster provisioning.   
+This project provides a comprehensive overview of provisioning a production-ready Kubernetes cluster on AWS. The infrastructure is provisioned using Terraform, while the cluster itself is set up with the help of Kubespray, an open-source tool for Kubernetes deployment.   
 
 ### Prerequisites
 
@@ -120,7 +119,7 @@ sudo ./aws/install
 
 ### setting up the environment
 
-the follow section is about how to set your environment and configure aws account with terraform and provision your aws infra.
+The following section covers how to set up your environment, configure your AWS account with Terraform, and provision your AWS infrastructure.
 
 1. check if terraform aws are correctly  installed
 ```sh
@@ -196,7 +195,7 @@ ssh-keygen -t rsa
 sudo vim /etc/hostname #set to name of the machine master as ex
 sudo vim /etc/hosts #assigne the localhost to that name dns resolution
 ```
-6. inssure the acess to other machines without the need of the password (this part is only for the master machine)
+6. This also ensures access to other machines without requiring a password (this step applies only to the master machine).
 ```sh
 ssh-copy-id master
 ssh-copy-id worker01
@@ -204,8 +203,9 @@ ssh-copy-id worker02
 ```
 ## Cluster provisioning
 
-In this part we'll use kubespray tool for cluster provisiong.
-NB: in this section we assume that you re connected by ssh to the master machine
+In this section, we'll use the Kubespray tool for cluster provisioning.
+
+Note: We assume that you are connected to the master machine via SSH
 1. clone the kubespray repo
 ```sh
 git clone https://github.com/kubernetes-sigs/kubespray.git
