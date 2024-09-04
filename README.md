@@ -127,7 +127,7 @@ on aws using terraform for infra provisiong and an open source  kubespray for cl
 
 ### Prerequisites
 
-first you need to install terraform cli
+first you need to install terraform-cli and aws-cli
 * terraform
   ```sh
   curl -LO "https://releases.hashicorp.com/terraform/$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r .current_version)/terraform_$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r .current_version)_linux_amd64.zip"
@@ -136,28 +136,52 @@ first you need to install terraform cli
   unzip terraform_*.zip
   sudo mv terraform /usr/local/bin/
   ```
+* aws-cli
+```sh
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
 
-### Installation
+### setting up the environment
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+the follow section is about how to set your environment and configure aws account with terraform and provision your aws infra.
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. check if terraform aws are correctly  installed
+```sh
+terraform --version
+aws --version
+```
+2. Clone the project 
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/Enstientt/deploying-a-Kubernetes-kubespray-cluster-on-AWS-.git
+   cd deplo...
    ```
-3. Install NPM packages
+3. configure aws with your aws account (if you don't already done it)
    ```sh
-   npm install
+   aws configure
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-5. Change git remote url to avoid accidental pushes to base project
+   enter the required information:
+   - AWS Access Key ID [None]:
+   - AWS Secret Access Key [None]
+   - Default region name [None]:
+   - Default output format [None]: (if empty is json by default)
+4. check if aws configured
    ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
+   aws configure list
+   ```
+5. Create the infrastructure (VMs) on aws:
+  - initial terraform to create aws provider and all the necessary files:
+   ```sh
+   terrafrom init
+   ```
+  - plan the provisioning :
+   ```sh
+    terraform plan
+   ```
+   - create the ressources :
+   ```sh
+    terraform apply
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
