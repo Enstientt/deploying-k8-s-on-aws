@@ -1,4 +1,4 @@
-# deploying-a-Kubernetes-kubespray-cluster-on-AWS-
+# deploying k8's on aws
 the cost of using a managed kubernetes cluster is high , so that we aim to create a customized kubernetes cluster using an open source tool like kubespray , with terraform for the cloud infrastructure provisioning.
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
@@ -129,10 +129,10 @@ on aws using terraform for infra provisiong and an open source  kubespray for cl
 
 first you need to install terraform-cli and aws-cli
 * terraform
-  ```sh
-  curl -LO "https://releases.hashicorp.com/terraform/$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r .current_version)/terraform_$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r .current_version)_linux_amd64.zip"
+```sh
+curl -LO "https://releases.hashicorp.com/terraform/$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r .current_version)/terraform_$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r .current_version)_linux_amd64.zip"
   ```
-  ```sh
+```sh
   unzip terraform_*.zip
   sudo mv terraform /usr/local/bin/
   ```
@@ -153,36 +153,36 @@ terraform --version
 aws --version
 ```
 2. Clone the project 
-   ```sh
-   git clone https://github.com/Enstientt/deploying-a-Kubernetes-kubespray-cluster-on-AWS-.git
-   cd deplo...
+```sh
+git clone https://github.com/Enstientt/deploying-k8-s-on-aws.git
+cd deploying-k8-s-on-aws
    ```
 3. configure aws with your aws account (if you don't already done it)
-   ```sh
-   aws configure
-   ```
-   enter the required information:
+```sh
+aws configure
+```
+enter the required information:
    - AWS Access Key ID [None]:
    - AWS Secret Access Key [None]
    - Default region name [None]:
    - Default output format [None]: (if empty is json by default)
 4. check if aws configured
-   ```sh
-   aws configure list
-   ```
+```sh
+aws configure list
+```
 5. Create the infrastructure (VMs) on aws:
-  - initial terraform to create aws provider and all the necessary files:
-   ```sh
-   terrafrom init
-   ```
-  - plan the provisioning :
-   ```sh
-    terraform plan
-   ```
-   - create the ressources :
-   ```sh
-    terraform apply
-   ```
+- initial terraform to create aws provider and all the necessary files:
+```sh
+terrafrom init
+```
+- plan the provisioning :
+```sh
+terraform plan
+ ```
+- create the ressources :
+```sh
+terraform apply
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
