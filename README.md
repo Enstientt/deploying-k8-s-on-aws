@@ -138,7 +138,7 @@ terraform apply
 
 <!-- USAGE EXAMPLES -->
 ## Setting up the vms for cluster provisioning
-We'll set only one machine and is the same for the 2 others ones.
+We'll set only one machine and is the same for the others.
 1. ssh into the machine
 First you should get the id_rsa + the public ip address and ssh into your machine.
 ```sh
