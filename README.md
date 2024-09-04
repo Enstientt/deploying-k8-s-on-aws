@@ -12,23 +12,6 @@ the cost of using a managed kubernetes cluster is high , so that we aim to creat
 
 
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -198,7 +181,7 @@ sudo passwd ubuntu
 ```sh
 sudo vim /etc/ssh/sshd_config
 ```
-addthe line
+add the lines
 ```bash
 PasswordAuthentication yes
 ChallengeResponseAuthentication yes
@@ -230,8 +213,8 @@ NB: in this section we assume that you re connected by ssh to the master machine
 git clone https://github.com/kubernetes-sigs/kubespray.git
 ```
 2. Ansible installation
-This part is already mention in kubespray docummentaion you can follow this link for to get this step done
-Link: [https://github.com/kubernetes-sigs/kubespray/blob/master/docs/ansible/ansible.md#installing-ansible](Ansible installation guide)
+This part is already mention in kubespray docummentaion you can follow this link for to get this step done<br />
+Link: [https://github.com/kubernetes-sigs/kubespray/blob/master/docs/ansible/ansible.md#installing-ansible]
 
 3. Deploy the k8s cluster
 ```sh
