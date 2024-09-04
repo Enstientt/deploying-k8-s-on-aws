@@ -54,8 +54,8 @@ the cost of using a managed kubernetes cluster is high , so that we aim to creat
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#setting-up-the-environment">setting up the environment</a></li>
+    <li><a href="#cluster-provisioning">Cluster provisioning</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
