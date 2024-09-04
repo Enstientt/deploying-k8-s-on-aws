@@ -183,12 +183,91 @@ terraform apply
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Setting up the vms for cluster provisioning
+We'll set only one machine and is the same for the 2 others ones.
+1. ssh into the machine
+First you should get the id_rsa + the public ip address and ssh into your machine.
+```sh
+ssh -i id_rsa ubuntu@54.19.19.19
+```
+2. set a password to ubuntu user
+```sh
+sudo passwd ubuntu
+```
+3. add the authentication by password
+```sh
+sudo vim /etc/ssh/sshd_config
+```
+addthe line
+```bash
+PasswordAuthentication yes
+ChallengeResponseAuthentication yes
+```
+```sh
+sudo systemctl restart ssh
+```
+4. generate an ssh key
+```sh
+ssh-keygen -t rsa
+```
+5. set the hostname for the machine to the convinion name
+``` sh
+sudo vim /etc/hostname #set to name of the machine master as ex
+sudo vim /etc/hosts #assigne the localhost to that name dns resolution
+```
+6. inssure the acess to other machines without the need of the password (this part is only for the master machine)
+```sh
+ssh-copy-id master
+ssh-copy-id worker01
+ssh-copy-id worker02
+```
+## Cluster provisioning
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+In this part we'll use kubespray tool for cluster provisiong.
+NB: in this section we assume that you re connected by ssh to the master machine
+1. clone the kubespray repo
+```sh
+git clone https://github.com/kubernetes-sigs/kubespray.git
+```
+2. Ansible installation
+This part is already mention in kubespray docummentaion you can follow this link for to get this step done
+Link: [https://github.com/kubernetes-sigs/kubespray/blob/master/docs/ansible/ansible.md#installing-ansible](Ansible installation guide)
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+3. Deploy the k8s cluster
+```sh
+# Copy ``inventory/sample`` as ``inventory/mycluster``
+cp -rfp inventory/sample inventory/mycluster
 
+# Update Ansible inventory file with inventory builder
+declare -a IPS=(10.10.1.3 10.10.1.4 10.10.1.5)
+CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
+
+# Review and change parameters under ``inventory/mycluster/group_vars``
+cat inventory/mycluster/group_vars/all/all.yml
+cat inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
+
+# Clean up old Kubernetes cluster with Ansible Playbook - run the playbook as root
+# The option `--become` is required, as for example cleaning up SSL keys in /etc/,
+# uninstalling old packages and interacting with various systemd daemons.
+# Without --become the playbook will fail to run!
+# And be mind it will remove the current kubernetes cluster (if it's running)!
+ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root reset.yml
+
+# Deploy Kubespray with Ansible Playbook - run the playbook as root
+# The option `--become` is required, as for example writing SSL keys in /etc/,
+# installing packages and interacting with various systemd daemons.
+# Without --become the playbook will fail to run!
+ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
+```
+After that your cluster is up you can set up a config file to easely interact with cluster
+```sh
+mkdir ~/.kube
+sudo cat /etc/kubernetes/admin.conf > ~/.kube/config
+```
+You can now run:
+```sh
+kubectl get pods -n kube-system
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -224,16 +303,6 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-### Top contributors:
-
-<a href="https://github.com/othneildrew/Best-README-Template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=othneildrew/Best-README-Template" alt="contrib.rocks image" />
-</a>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- LICENSE -->
 ## License
 
@@ -251,33 +320,4 @@ Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.c
 Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[Terrafrom]: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_q7LYbxxCUhtNrcX0YJjV7DN_qoifqutPwA&s
-[terraform-url]: https://www.terraform.io/
-[aws]: https://cdn.iconscout.com/icon/premium/png-256-thumb/aws-2749233-2284623.png?f=webp
-[aws-url]: https://aws.amazon.com/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
 
