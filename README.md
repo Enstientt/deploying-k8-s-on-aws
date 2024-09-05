@@ -15,7 +15,7 @@ the cost of using a managed kubernetes cluster is high , so that we aim to creat
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="https://plugins.jetbrains.com/files/7808/595185/icon/pluginIcon.png" alt="Logo" width="80" height="80">
+  <img alt="Terraform" src="https://www.datocms-assets.com/2885/1629941242-logo-terraform-main.svg" width="600px">
   <h3 align="center">Terraform HCL</h3>
 
   <p align="center">
@@ -131,8 +131,7 @@ terraform apply
 <!-- USAGE EXAMPLES -->
 ## Setting up the vms for cluster provisioning
 We'll set only one machine and is the same for the others.
-1. ssh into the machine
-First you should get the id_rsa + the public ip address and ssh into your machine.
+1. Get the id_rsa + the public ip address and ssh into your machine.
 ```sh
 ssh -i id_rsa ubuntu@54.19.19.19
 ```
